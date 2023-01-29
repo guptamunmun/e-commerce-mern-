@@ -1,24 +1,40 @@
 const express = require("express");
-const { default: mongoose } = require("mongoose");
+const cors = require("cors");
 require("./db/config");
-const user = require("./db/User");
+const User = require("./db/User");
+const e = require("express");
 const app = express();
+app.use(cors());
+app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("hello Let's get started");
+// sign up
+app.post("/register", async (req, res) => {
+  const user = new User(req.body);
+  const response = await user.save();
+  const result = {
+    name: response.name,
+    email: response.email,
+  };
+  res.send(result);
 });
 
-// mongodb+srv://functionup-cohort:*****@cluster0.jn5ja3l.mongodb.net/backend?retryWrites=true&w=majority
-// mongoose
-//   .connect(
-//     "mongodb+srv://mayank222:68Kt3Wl1jGT0gtpM@cluster0.o46h9ld.mongodb.net/e-commerce",
-//     { useNewUrlParser: true }
-//   )
-//   .then(() => console.log("MongoDb is connected"))
-//   .catch((err) => console.log(err));
+// login user
+app.post("/login", async (req, res) => {
+  let data = req.body;
+  const { email, password } = data;
+  if (!email) return res.send("email is required");
+  if (!password) return res.send("password is required");
+  const user = await User.findOne(req.body).select("-password");
+  if (!user) {
+    res.send("user not exist");
+  } else {
+    res.send(user);
+  }
+});
 
-app.post("/register", (req, res) => {
-  res.send("started");
+// for wrong url
+app.use("/*", (req, res) => {
+  res.send("check url");
 });
 
 app.listen(3000, () => {
