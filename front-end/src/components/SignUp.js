@@ -7,7 +7,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   // for redirect
   const nevigate = useNavigate();
-
+  
 
   useEffect(() => {
     const auth = localStorage.getItem("user");

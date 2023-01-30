@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 mongoose
   .connect("mongodb+srv://jay420:gRLzeLdOa6ENyasF@cluster0.dnkg3q6.mongodb.net/e-commerce",
     { useNewUrlParser: true }
-  )
+  ) 
   .then(() => console.log("MongoDb is connected"))
   .catch((err) => console.log(err));
 
