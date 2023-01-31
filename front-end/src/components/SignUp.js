@@ -14,7 +14,7 @@ const SignUp = () => {
     if (auth) {
       nevigate("/");
     }
-  });
+  },[]);
 
   const collectData = async () => {
     console.log(name, email, password);
