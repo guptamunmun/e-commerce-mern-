@@ -40,7 +40,7 @@ app.post("/add-product", async (req, res) => {
   let result = await product.save();
   res.send(result);
 });
-//get product
+//get product details
 app.get("/get-product", async (req, res) => {
   const products = await Product.find();
   if (products.length > 0) {

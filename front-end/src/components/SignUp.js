@@ -29,7 +29,7 @@ const SignUp = () => {
     console.log(result);
     // to set data in localStorage
     localStorage.setItem("user", JSON.stringify(result));
-    nevigate("/");
+    nevigate("/login");
   };
 
   return (
